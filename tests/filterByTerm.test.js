@@ -1,10 +1,10 @@
-import { filterByTerm } from "../filterByTerm";
+import { filterByTerm } from "../src/filterByTerm";
 
 describe("Filter function", () => {
     const input = [
         { id: 1, url: "https://www.url1.dev" },
         { id: 2, url: "https://www.url2.dev" },
-        { id: 3, url: "https://www.link3.dev" }
+        { id: 3, url: "https://www.link3.dev" },
     ];
 
     it("should filter by the search term 'link'", () => {
@@ -17,7 +17,7 @@ describe("Filter function", () => {
     it("should filter by the search term 'url'", () => {
         const output = [
             { id: 1, url: "https://www.url1.dev" },
-            { id: 2, url: "https://www.url2.dev" }
+            { id: 2, url: "https://www.url2.dev" },
         ];
 
         expect(filterByTerm(input, "url")).toEqual(output);
@@ -34,19 +34,19 @@ describe("Filter function", () => {
         expect(filterByTerm(input, "ur_straight_l")).toEqual(output);
     });
 
-    it('should return the input for an empty search term', () => {
+    it("should return the input for an empty search term", () => {
         const output = input;
 
         expect(filterByTerm(input, "")).toEqual(output);
     });
 
-    it('should throw an error for an empty search term', () => {
+    it("should throw an error for an empty search term", () => {
         const output = new Error("Empty search term");
-        
+
         expect(() => filterByTerm(input, "", true)).toThrow(output);
     });
 
-    it('should throw an error for non-string search terms', () => {
+    it("should throw an error for non-string search terms", () => {
         const output = new Error("Non-string search term");
 
         expect(() => filterByTerm(input, 123)).toThrow(output);
@@ -56,7 +56,7 @@ describe("Filter function", () => {
         expect(() => filterByTerm(input, () => {})).toThrow(output);
     });
 
-    it('should throw an error for non-array inputs', () => {
+    it("should throw an error for non-array inputs", () => {
         const output = new Error("Non-array input");
 
         expect(() => filterByTerm(null, "url")).toThrow(output);
@@ -66,7 +66,7 @@ describe("Filter function", () => {
         expect(() => filterByTerm({ values: input }, "url")).toThrow(output);
     });
 
-    it('should throw an error for empty array input', () => {
+    it("should throw an error for empty array input", () => {
         const output = new Error("Empty array input");
 
         expect(() => filterByTerm([], "url")).toThrow(output);
